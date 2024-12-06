@@ -8,8 +8,8 @@ rep = r"don\'t\(\).*?(do\(\)|$)"
 def muls(l):
     return sum(int(x)*int(y) for x,y in re.findall(p, l))
 
-print(muls(line))
-print(muls(re.sub(rep, "", line, flags=re.DOTALL)))
+print("part1", muls(line))
+print("part2", muls(re.sub(rep, "", line, flags=re.DOTALL)))
 exit()
 
 from functools import reduce
