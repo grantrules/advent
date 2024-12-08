@@ -1,15 +1,13 @@
 from fileinput import input
 
+
 def get_all(arr, length):
     for i in range(0, len(arr) ** length):
         yield (res := int_to_perm(arr,i)) + [arr[0]] * (length - len(res))
 
 def int_to_perm(arr, num):
-    res = []
-    while num > 0:
-        res += [arr[num % len(arr)]]
-        num //= len(arr) 
-    return res
+    return [] if num == 0 else \
+        [arr[num % len(arr)]] + int_to_perm(arr, num // len(arr))
 
 def check(value, nums, o):
     total = nums[0]
