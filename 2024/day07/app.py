@@ -2,8 +2,7 @@ from fileinput import input
 
 def get_all(arr, length):
     for i in range(0, len(arr) ** length):
-        res = int_to_perm(arr,i)
-        yield res + [arr[0] for i in range(0,length - len(res))]
+        yield (res := int_to_perm(arr,i)) + [arr[0]] * (length - len(res))
 
 def int_to_perm(arr, num):
     res = []
@@ -18,10 +17,8 @@ def check(value, nums, o):
         total = op(total,nums[i+1])
     return value == total
 
-
 def is_valid(value, nums, ops):
-    o = list(get_all(ops, len(nums)-1))
-    return any([check(value, nums,oplist) for oplist in o])
+    return any([check(value, nums, oplist) for oplist in get_all(ops, len(nums)-1)])
 
 ops = [lambda a,b: a+b, lambda a,b: a*b]
 
